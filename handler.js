@@ -69,7 +69,7 @@ try {
      var ret = [];
 
   // Use the connection
-   var qqq = "select id, date, lot from job where market_id = 5 limit 10";
+   var qqq = 'select id, DATE_FORMAT(date, "%M %d %Y") as datum, lot from job where market_id = 5 limit 10';
   console.log(qqq);
   
   connection.query(qqq, function (error, results, fields) {
@@ -77,7 +77,7 @@ try {
      for (var i of results) {
         console.log(i);
         console.log(i.id );
-        ret.push(i.id + ";" + i.date + ";" + i.lot);
+        ret.push(i.id + ";" +  i.datum + ";" + i.lot);
      }
     context.succeed(JSON.stringify(ret)); 
        console.log('AAA' +ret);
