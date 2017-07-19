@@ -1,0 +1,23 @@
+{
+  "name": "lex-brightrex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "aws-sdk": "^2.60.0",
+    "es6-promisify": "^5.0.0",
+    "jest": "^20.0.4",
+    "lodash": "^4.17.4",
+    "regex-email": "^1.0.2",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "cross-env": "^5.0.1",
+    "jest": "^20.0.4"
+  }
+}
