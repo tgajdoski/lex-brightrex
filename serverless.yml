@@ -67,20 +67,20 @@ functions:
     handler: handler.intents
   saveUserFavorites:
     handler: handler.saveUserEmail
-    events:
-      - stream:
-          type: dynamodb
-          arn:
-            Fn::GetAtt:
-              - BrightrexUserTable
-              - StreamArn
-          batchSize: 1
-          startingPosition: LATEST
+    # events:
+    #   - stream:
+    #       type: dynamodb
+    #       arn:
+    #         Fn::GetAtt:
+    #           - BrightrexUserTable
+    #           - StreamArn
+    #       batchSize: 1
+    #       startingPosition: LATEST
 
 # you can add CloudFormation resource templates here
 resources:
   Resources:
-    CoffeeUserTable:
+    BrightrexUserTable:
       Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
