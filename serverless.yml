@@ -77,6 +77,8 @@ functions:
     handler: handler.intents
   saveUserFavorites:
     handler: handler.saveUserEmail
+  getQuery:
+    handler: handler.query
     # events:
     #   - stream:
     #       type: dynamodb
