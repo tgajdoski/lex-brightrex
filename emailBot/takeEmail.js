@@ -5,12 +5,13 @@ const handleFulfillmentCodeHook = require('./manageFullfilment');
 
 module.exports = function(intentRequest) {
   const source = intentRequest.invocationSource;
-
+  console.log('vo takeEmail source :' + source );
   if (source === 'DialogCodeHook') {
     return handleDialogCodeHook(intentRequest);
   }
 
   if (source === 'FulfillmentCodeHook') {
+    console.log('FULFILED handle');
     return handleFulfillmentCodeHook(intentRequest);
   }
 };

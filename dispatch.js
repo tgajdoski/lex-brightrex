@@ -1,6 +1,6 @@
 'use strict';
 
-
+const takeEmail = require('./emailBot/takeEmail');
 
 module.exports = function(intentRequest) {
   console.log(`dispatch userId=${intentRequest.userId}, intentName=${intentRequest.currentIntent.name}`);
@@ -8,8 +8,9 @@ module.exports = function(intentRequest) {
 
   if (intentName === 'welcome') {
     console.log(intentName + ' was called');
-    return orderCoffee(intentRequest);
+    return takeEmail(intentRequest);
   }
 
   throw new Error(`Intent with name ${intentName} not supported`);
 };
+

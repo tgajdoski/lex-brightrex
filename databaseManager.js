@@ -10,12 +10,10 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports.saveUserToDatabase = function(userId, email) {
   console.log('saveUserToDatabase');
-
   const item = {};
   item.email = email;
   item.userId = userId;
-
-  return saveItemToTable('brigtrex-user-table', item);
+  return saveItemToTable('brightrex-user-table', item);
 };
 
 module.exports.findUserEmail = function(userId) {

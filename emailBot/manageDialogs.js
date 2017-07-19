@@ -2,6 +2,7 @@
 
 const lexResponses = require('../lexResponses');
 const regex = require('regex-email');
+const databaseManager = require('../databaseManager');
 
 function buildValidationResult(isValid, violatedSlot, messageContent) {
   if (messageContent == null) {
@@ -32,6 +33,11 @@ function validateSpEmail(email) {
   return buildValidationResult(true, null, null);
 }
 
+function findUserEmailBase(userId) {
+  return databaseManager.findUserEmail(userId).then(item => {
+    return buildUserFavoriteResult(item.email,  `is this your email ${item.email} ?`);
+  });
+}
 
 module.exports = function(intentRequest) {
   var email = intentRequest.currentIntent.slots.email;
@@ -39,7 +45,7 @@ module.exports = function(intentRequest) {
   const slots = intentRequest.currentIntent.slots;
 
   if (email === null) {
-    return findUserFavorite(userId)
+    return findUserEmailBase(userId)
       .then(item => {
         slots.email = item.size;
         //Ask the user if he will like to proceed with this email
