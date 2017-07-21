@@ -47,8 +47,7 @@ module.exports = function(intentRequest) {
   const slots = intentRequest.currentIntent.slots;
 
 
-  console.log(intentRequest.currentIntent.slots);
-console.log(email +'jobid ' + jobid + 'userid ' + userId)
+  console.log(email +'jobid ' + jobid + 'userid ' + userId)
 
   if (email === null && jobid ===null) {
     return findUserEmailBase(userId)
@@ -85,13 +84,7 @@ console.log(email +'jobid ' + jobid + 'userid ' + userId)
             { text: 'job_id 555', value: '555' }
         ];
 
-      console.log(JSON.stringify(lexResponses.buildResponseCard('Select job', `pick one job from response card`,arr_jobs )));
-
-      console.log(JSON.stringify(lexResponses.elicitSlot(intentRequest.sessionAttributes, intentRequest.currentIntent.name,
-            intentRequest.currentIntent.slots, 'jobid',
-            { contentType: 'PlainText', content: `moze da mu kaze dobredojte ti i ti i evo ti responsecard so jobovi. Please select jobid` },
-            lexResponses.buildResponseCard('Select job', `pick one job from response card`,arr_jobs ))));
-
+    
     return  Promise.resolve(lexResponses.elicitSlot(intentRequest.sessionAttributes, intentRequest.currentIntent.name,
             intentRequest.currentIntent.slots, 'jobid',
             { contentType: 'PlainText', content: `moze da mu kaze dobredojte ti i ti i evo ti responsecard so jobovi. Please select jobid` },
@@ -100,21 +93,24 @@ console.log(email +'jobid ' + jobid + 'userid ' + userId)
     //  return Promise.resolve(lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots));
   }
   else if (email !== null && jobid !==null) {
-      console.log("TUKA PUKAM");
-      return Promise.resolve(lexResponses.confirmIntent(intentRequest.sessionAttributes, intentRequest.currentIntent.name, slots, { contentType: 'PlainText', content: `proceed with job` + jobid + ' ?'}
-     ));
+    //   console.log("TUKA PUKAM");
+    //   return Promise.resolve(lexResponses.confirmIntent(intentRequest.sessionAttributes, intentRequest.currentIntent.name, slots, { contentType: 'PlainText', content: `proceed with job` + jobid + ' ?'}
+    //  ));
 
-    // var email = intentRequest.currentIntent.slots.email;
-    // var userId = intentRequest.userId;
-    // const jobid  = intentRequest.currentIntent.slots.jobid;
-    // intentRequest.sessionAttributes.push({
-    //    'currentReservation': '{userId : ' + userId + ',  email :' + email + 'jobid : ' +jobid + '}'
-    // });
-    // return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null))
+    // OVA NE TREBA IZGLEDA TO E FULFILMENT DELOT (probaj bez nego)
+    // VIDI SO CONFIRM DALI MOZE
+
+    var email = intentRequest.currentIntent.slots.email;
+    var userId = intentRequest.userId;
+    const jobid  = intentRequest.currentIntent.slots.jobid;
+    intentRequest.sessionAttributes = {
+       'currentReservation': '{userId : ' + userId + ',  email :' + email + 'jobid : ' +jobid + '}'
+    };
+    return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null))
 
   }
   else {
-  return lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots); 
+      return lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots); 
   };
 
 };
