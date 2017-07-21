@@ -104,7 +104,7 @@ module.exports = function(intentRequest) {
     var userId = intentRequest.userId;
     const jobid  = intentRequest.currentIntent.slots.jobid;
     intentRequest.sessionAttributes = {
-       'currentReservation': '{userId : ' + userId + ',  email :' + email + 'jobid : ' +jobid + '}'
+       'currentReservation': '{userId : ' + userId + ',  email :' + email + ', jobid : ' +jobid + '}'
     };
     return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null))
 
