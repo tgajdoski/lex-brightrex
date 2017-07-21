@@ -75,10 +75,10 @@ provider:
 functions:
   intents:
     handler: handler.intents
-  saveUserFavorites:
-    handler: handler.saveUserEmail
   getQuery:
     handler: handler.query
+  activity:
+    handler: handler.ActivityIntent
     # events:
     #   - stream:
     #       type: dynamodb

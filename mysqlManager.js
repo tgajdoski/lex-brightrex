@@ -1,7 +1,5 @@
 'use strict';
 
-//exports.handler = (event, context, callback) => {
-
 var mysql = require('mysql');
 
 var pool = mysql.createPool({

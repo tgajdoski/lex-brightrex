@@ -10,7 +10,8 @@ function buildFulfilmentResult(fullfilmentState, messageContent) {
   };
 }
 
-function fullfilEmail(userId, email) {
+function fullfilWelcome(userId, email) {
+  
   console.log('vo fullfilOrder funkcijata' + userId +  email);
   return databaseManager.saveUserToDatabase(userId, email).then(item => {
    console.log('VO fullfilEmail callbackot');
@@ -24,10 +25,10 @@ function fullfilEmail(userId, email) {
 module.exports = function(intentRequest) {
   var email = intentRequest.currentIntent.slots.email;
   var userId = intentRequest.userId;
+    var jobid  = intentRequest.currentIntent.slots.jobid;
+    intentRequest.sessionAttributes.push({
+       'currentReservation': '{userId : ' + userId + ',  email :' + email + 'jobid : ' +jobid + '}'
+    })
+    return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null))
 
-  return fullfilEmail(userId, email).then(fullfiledEmail => {
-    console.log('VO fullfilEmail requestot');
-   // return lexResponses.close(intentRequest.sessionAttributes, fullfiledEmail.fullfilmentState, fullfiledEmail.message);
-     return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, fullfiledEmail.fullfilmentState, null))
-  });
 };

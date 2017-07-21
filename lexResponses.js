@@ -10,7 +10,8 @@ module.exports.delegate = function(sessionAttributes, slots) {
   };
 };
 
-module.exports.elicitSlot = function(sessionAttributes, intentName, slots, slotToElicit, message) {
+
+module.exports.elicitSlot = function(sessionAttributes, intentName, slots, slotToElicit, message, responseCard) {
   return {
     sessionAttributes,
     dialogAction: {
@@ -18,10 +19,14 @@ module.exports.elicitSlot = function(sessionAttributes, intentName, slots, slotT
       intentName,
       slots,
       slotToElicit,
-      message
+      message,
+      responseCard
     }
   };
 };
+
+
+
 
 module.exports.close = function(sessionAttributes, fulfillmentState, message) {
   return {
@@ -45,3 +50,27 @@ module.exports.confirmIntent = function(sessionAttributes, intentName, slots, me
     }
   };
 };
+
+// Build a responseCard with a title, subtitle, and an optional set of options which should be displayed as buttons.
+module.exports.buildResponseCard = function(title, subTitle, options) {
+    let buttons = null;
+    if (options != null) {
+        buttons = [];
+        for (let i = 0; i < options.length; i++) {
+            buttons.push(options[i]);
+        }
+    }
+
+  //  console.log(options);
+  //  console.log(buttons);
+      
+    return {
+        contentType: 'application/vnd.amazonaws.card.generic',
+        version: 1,
+        genericAttachments: [{
+            title,
+            subTitle,
+            buttons,
+        }],
+    };
+}
