@@ -10,6 +10,10 @@ function buildFulfilmentResult(fullfilmentState, messageContent) {
   };
 }
 
+function buildFulfilmentMessage(messageContent) {
+  return  { contentType: 'PlainText', content: messageContent };
+}
+
 function fullfilWelcome(userId, email) {
   
   console.log('vo fullfilOrder funkcijata' + userId +  email);
@@ -23,12 +27,38 @@ function fullfilWelcome(userId, email) {
 }
 
 module.exports = function(intentRequest) {
-  var email = intentRequest.currentIntent.slots.email;
-  var userId = intentRequest.userId;
+  console.log('PUKA LI OVA VOOPSTO');
+    var email = intentRequest.currentIntent.slots.email;
+    var userId = intentRequest.userId;
     var jobid  = intentRequest.currentIntent.slots.jobid;
-     intentRequest.sessionAttributes ={
-       'currentReservation': '{userId : ' + userId + ',  email :' + email + 'jobid : ' +jobid + '}'
-    };
-    return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null))
+    var activity  = intentRequest.currentIntent.slots.activity;
+
+    intentRequest.sessionAttributes ={
+       'currentReservation': '{userId : ' + userId + ',  email :' + email + ', jobid : ' +jobid + ', activity : ' +activity + '}'
+     };
+    
+     var messageBot = '';
+   
+    switch(activity) {
+      case 'eta':
+          messageBot = 'would you like to enter ETA activity now ?';
+          break;
+      case 'instructions':
+          messageBot = 'would you like to enter Instructions activity now ?'; 
+          break;
+      case 'note':
+          messageBot = 'would you like to enter Note activity now ?'; 
+          break;
+      case 'image':
+          messageBot = 'would you like to enter Image activity now ?'; 
+          break;
+      default:
+          messageBot = 'would you like to enter Note activity now ?';
+    } 
+
+  console.log('ZAVRSUVAM SO welcome intentot: ' + lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot)));
+  return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot)));
+
+  // return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null));
 
 };

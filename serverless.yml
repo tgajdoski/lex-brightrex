@@ -77,8 +77,6 @@ functions:
     handler: handler.intents
   getQuery:
     handler: handler.query
-  activity:
-    handler: handler.ActivityIntent
     # events:
     #   - stream:
     #       type: dynamodb

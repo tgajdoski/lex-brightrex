@@ -20,23 +20,15 @@ var pool = mysql.createPool({
 
 module.exports.intents = (event, context, callback) => {
   try {
-    console.log(event);
-    console.log(`event.bot.name=${event.bot.name}`);
-    console.log(`event.currentIntent.slots=${event.currentIntent.slots}`);
-
+     console.log('EVEEENT' + JSON.stringify(event));
+    // console.log(`event.bot.name=${event.bot.name}`);
     dispatch(event).then(response => {
       callback(null, response);
     });
-  } catch (err) {
+  }
+   catch (err) {
     callback(err);
   }
-};
-
-
-module.exports.ActivityIntent = (event, context, callback) => {
-    console.log('ActivityIntent lambda called');
-    console.log(event);
-    callback(null, null);
 };
 
 
