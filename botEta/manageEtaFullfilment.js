@@ -19,9 +19,9 @@ module.exports = function(intentRequest) {
     var userId = intentRequest.userId;
     var jobid  = intentRequest.sessionAttributes.jobid;
     var activity  = intentRequest.sessionAttributes.activity;
-    var note  = intentRequest.currentIntent.slots.slotOne;
+    var eta  = intentRequest.currentIntent.slots.eta;
     
-  return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage( `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`)));
+  return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage( `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and eta "${eta}" has been picked`)));
   //   return buildFulfilmentResult('Fulfilled', `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`);
    
 };

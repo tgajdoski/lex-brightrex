@@ -49,7 +49,7 @@ module.exports = function(intentRequest) {
 
      intentRequest.sessionAttributes = buildSessionAtributest(email, jobid, userId, activity);
     
-     console.log(JSON.stringify(intentRequest.sessionAttributes));
+   //  console.log(JSON.stringify(intentRequest.sessionAttributes));
     // intentRequest.sessionAttributes = {
     //    'currentReservation': '{"userId" : "' + userId + '",  "email" :"' + email + '", "jobid" : "' +jobid + '", "activity" : "' +activity + '"}'
     //  };
@@ -58,22 +58,22 @@ module.exports = function(intentRequest) {
    
     switch(activity) {
       case 'eta':
-          messageBot = 'would you like to enter ETA activity now ?';
+          messageBot = 'write or say "add eta" to start ETA activity.';
           break;
       case 'instructions':
-          messageBot = 'would you like to enter Instructions activity now ?'; 
+          messageBot = 'write or say "check instructions" to start Instructions activity.'; 
           break;
       case 'note':
-          messageBot = 'would you like to enter Note activity now ?'; 
+          messageBot = 'write or say "add note" to start Note activity.';
           break;
       case 'image':
-          messageBot = 'would you like to enter Image activity now ?'; 
+          messageBot = 'write or say "add image" to start Image activity.';
           break;
       default:
-          messageBot = 'would you like to enter Note activity now ?';
+          messageBot = 'write or say "add note" to start Note activity.';
     } 
 
-  console.log('ZAVRSUVAM SO welcome intentot: ' + JSON.stringify(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot))));
+ // console.log('ZAVRSUVAM SO welcome intentot: ' + JSON.stringify(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot))));
   return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot)));
 
   // return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null));

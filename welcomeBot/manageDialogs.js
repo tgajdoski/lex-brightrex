@@ -45,8 +45,6 @@ module.exports = function(intentRequest) {
     return findUserEmailBase(userId)
       .then(item => {
         slots.email = item.email;
-        console.log('TUKAAA');
-        console.log(slots);
           // odma barame vo baza i prasuvame dali saka da prodolzi so najdeniot CONFIRM ni treba
           //Ask the user if he will like to proceed with this email
         return lexResponses.confirmIntent(intentRequest.sessionAttributes, intentRequest.currentIntent.name, intentRequest.currentIntent.slots, item.message);
@@ -82,7 +80,7 @@ module.exports = function(intentRequest) {
     
     return  Promise.resolve(lexResponses.elicitSlot(intentRequest.sessionAttributes, intentRequest.currentIntent.name,
             intentRequest.currentIntent.slots, 'jobid',
-            { contentType: 'PlainText', content: `moze da mu kaze dobredojte ti i ti i evo ti responsecard so jobovi. Please select jobid` },
+            { contentType: 'PlainText', content: `Hi ${email} this is the list of your jobs. Please select one` },
             lexResponses.buildResponseCard('Select job', `pick one job from response card`,arr_jobs )));
 
     //  return Promise.resolve(lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots));
@@ -113,7 +111,7 @@ module.exports = function(intentRequest) {
   // }
   else {
      // return lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots); 
-     console.log('ponekogas TUKA ');
+     // console.log('ponekogas TUKA ');
       return Promise.resolve(lexResponses.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots));
   }
 
