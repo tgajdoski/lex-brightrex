@@ -14,13 +14,14 @@ function buildFulfilmentMessage(messageContent) {
 }
 
 module.exports = function(intentRequest) {
-   console.log('1.' + JSON.stringify(intentRequest)); 
+
     var email = intentRequest.sessionAttributes.email;
     var userId = intentRequest.userId;
     var jobid  = intentRequest.sessionAttributes.jobid;
     var activity  = intentRequest.sessionAttributes.activity;
-    var note  = intentRequest.currentIntent.slots.note;
+    var note  = intentRequest.currentIntent.slots.slotOne;
     
-     return buildFulfilmentResult('Fulfilled', `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`);
+  return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage( `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`)));
+  //   return buildFulfilmentResult('Fulfilled', `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`);
    
 };

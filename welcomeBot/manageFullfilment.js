@@ -26,16 +26,33 @@ function fullfilWelcome(userId, email) {
   });
 }
 
+
+function buildSessionAtributest(email,jobid , userId,activity) {
+  return {
+     userId: userId, email: email, jobid: jobid, activity: activity 
+  };
+}
+
+
 module.exports = function(intentRequest) {
   console.log('PUKA LI OVA VOOPSTO');
     var email = intentRequest.currentIntent.slots.email;
     var userId = intentRequest.userId;
     var jobid  = intentRequest.currentIntent.slots.jobid;
     var activity  = intentRequest.currentIntent.slots.activity;
+    
+    // session['attributes']['slotKey'] = intent['slots']['slotKey']['value']
+    // intentRequest.sessionAttributes.currentReservation.userId = userId;
+    // intentRequest.sessionAttributes.currentReservation.email = email;
+    // intentRequest.sessionAttributes.currentReservation.jobid = jobid;
+    // intentRequest.sessionAttributes.currentReservation.activity = activity;
 
-    intentRequest.sessionAttributes ={
-       'currentReservation': '{userId : ' + userId + ',  email :' + email + ', jobid : ' +jobid + ', activity : ' +activity + '}'
-     };
+     intentRequest.sessionAttributes = buildSessionAtributest(email, jobid, userId, activity);
+    
+     console.log(JSON.stringify(intentRequest.sessionAttributes));
+    // intentRequest.sessionAttributes = {
+    //    'currentReservation': '{"userId" : "' + userId + '",  "email" :"' + email + '", "jobid" : "' +jobid + '", "activity" : "' +activity + '"}'
+    //  };
     
      var messageBot = '';
    
@@ -56,7 +73,7 @@ module.exports = function(intentRequest) {
           messageBot = 'would you like to enter Note activity now ?';
     } 
 
-  console.log('ZAVRSUVAM SO welcome intentot: ' + lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot)));
+  console.log('ZAVRSUVAM SO welcome intentot: ' + JSON.stringify(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot))));
   return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage(messageBot)));
 
   // return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', null));
