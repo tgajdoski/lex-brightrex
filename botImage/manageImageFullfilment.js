@@ -15,13 +15,14 @@ function buildFulfilmentMessage(messageContent) {
 
 module.exports = function(intentRequest) {
 
+    console.log(JSON.stringify(intentRequest));
     var email = intentRequest.sessionAttributes.email;
     var userId = intentRequest.userId;
     var jobid  = intentRequest.sessionAttributes.jobid;
     var activity  = intentRequest.sessionAttributes.activity;
-    var ​imagepath  = intentRequest.currentIntent.slots.​imagepath;
+    var imagepathslot  = intentRequest.currentIntent.slots.imagepathslot;
     
-    return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage( `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and imagepath "${​imagepath}" has been picked`)));
+  return Promise.resolve(lexResponses.close(intentRequest.sessionAttributes, 'Fulfilled', buildFulfilmentMessage( `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and imagepath ${imagepathslot} has been picked`)));
   //   return buildFulfilmentResult('Fulfilled', `Thanks, your email ${email}, jobid ${jobid}, activity ${activity} and note ${note} has been picked`);
    
 };
