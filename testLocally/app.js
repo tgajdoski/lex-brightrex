@@ -1,8 +1,3 @@
-'use strict';
-
-const dispatch = require('./dispatch');
-const userFavorites = require('./userEmail/userEmail');
-
 
 
 // // test mysql
@@ -23,7 +18,7 @@ var pool = mysql.createPool({
 // });
 
 
-module.exports.query = (event, context, callback) => {
+function callQuery(){
     try {
       pool.getConnection(function(err, connection) {
         if (!err)
@@ -36,7 +31,7 @@ module.exports.query = (event, context, callback) => {
                     var spidto = i.id;
                     console.log('asdasdasdsa' + spidto);
                     // zemeno id-to
-                    var qqq = `select jobId, tempStoreNum from tbljobs where jobid in (select job_id from wo_service where crew_leader_id = '` + spidto + "'";
+                    var qqq = `select jobId, tempStoreNum from tbljobs where jobid in (select job_id from wo_service where crew_leader_id = '` + spidto + "')";
                     console.log(qqq);
               
                     connection.query(qqq, function (error, results, fields) {
@@ -73,6 +68,7 @@ module.exports.query = (event, context, callback) => {
     }
 };
 
+callQuery();
 
 // module.exports.query = (event, context, callback) => {
    

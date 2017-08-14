@@ -69,11 +69,13 @@ module.exports = function(intentRequest) {
     
     // treba da vratime ElicitSlot za da pobarame jobid
     // toj elexitSlot moze da mu kaze dobredojte ti i ti i evo ti responsecard so jobovi
+
+    
     var arr_jobs =  [
             { text: 'job_id 111', value: '111' },
             { text: 'job_id 222', value: '222' },
             { text: 'job_id 333', value: '333' },
-            { text: 'job_id 444 ', value: '444' },
+            { text: 'job_id 444', value: '444' },
             { text: 'job_id 555', value: '555' }
         ];
 
