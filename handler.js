@@ -37,14 +37,14 @@ var pool = mysql.createPool({
 //   })
 // }
 
-var pool = mysql.createPool({
-      host     : '35.164.32.123',
-      user     : 'ffi',
-      password : 'Firm2825',
-      // user     : 'root',
-      // password : 'Pa$$w0rd-my$ql_3V0t3$t',
-      database : 'test.brihtrex.com'
-});
+// var pool = mysql.createPool({
+//       host     : '35.164.32.123',
+//       user     : 'ffi',
+//       password : 'Firm2825',
+//       // user     : 'root',
+//       // password : 'Pa$$w0rd-my$ql_3V0t3$t',
+//       database : 'test.brihtrex.com'
+// });
 
 module.exports.query = (event, context, callback) => {
     try {
